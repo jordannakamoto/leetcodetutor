@@ -46,7 +46,7 @@ const highlightVariables = (description) => {
   
         // Handle constraints with bullets and highlighting
         if (/^\s*[-•]/.test(line)) {
-          return `<p class="constraint-item bg-gray-100 p-2 rounded-lg mt-2">• ${line.trim().replace(/^[-•]\s*/, "")}</p>`;
+          return `<p class="constraint-item bg-gray-800 p-2 rounded-lg mt-2">• ${line.trim().replace(/^[-•]\s*/, "")}</p>`;
         }
   
         // Default highlighting for the main description
@@ -107,7 +107,7 @@ export default function LCDisplay() {
 
 
   return (
-    <div className="p-4 bg-gray-100 rounded-lg shadow-md">
+    <div className=" bg-gray-1 ">
       {/* <h2 className="text-2xl font-bold mb-4">
         {selectedProblem ? "Problem Details" : "LeetCode Problems"}
       </h2> */}
@@ -117,7 +117,7 @@ export default function LCDisplay() {
         <div>
           <button
             onClick={handleBack}
-            className="text-blue-500 hover:underline mb-4 flex items-center"
+            className="text-blue-1 hover:underline mb-4 flex items-center"
           >
             ← Back to Problem List
           </button>
@@ -135,7 +135,7 @@ export default function LCDisplay() {
               href={selectedProblem.problem_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-500 hover:underline"
+              className="text-gold-1 hover:underline"
             >
               View Problem on LeetCode
             </a>
@@ -153,6 +153,7 @@ export default function LCDisplay() {
                 setDifficulty(e.target.value);
                 setPage(1); // Reset to page 1
               }}
+              style={{backgroundColor:"black",border:"None", color: "gray"}}
               className="border rounded px-2 py-1"
             >
               <option value="">All</option>
@@ -171,26 +172,26 @@ export default function LCDisplay() {
             <>
               {/* Table of Problems */}
               <div className="overflow-x-auto">
-                <table className="w-full border-collapse border border-gray-300">
+                <table style={{color:"gray"}}className="w-full border-collapse border border-gray-900">
                   <thead>
-                    <tr className="bg-gray-200">
-                      <th className="border px-4 py-2">Title</th>
+                    <tr className="bg-gray-900">
+                      <th className=" px-4 py-2">Title</th>
                       {!difficulty && (
-                        <th className="border px-4 py-2">Difficulty</th>
+                        <th className=" px-4 py-2">Difficulty</th>
                       )}
                     </tr>
                   </thead>
                   <tbody>
                     {data.map((problem, index) => (
-                      <tr key={index} className="hover:bg-gray-100">
+                      <tr key={index} className="hover:bg-gray-900">
                         <td
-                          className="border px-4 py-2 text-blue-500 hover:underline cursor-pointer"
+                          className=" px-4 py-2 text-blue-500 hover:underline cursor-pointer"
                           onClick={() => handleSelectProblem(problem)}
                         >
                           {problem.title}
                         </td>
                         {!difficulty && (
-                          <td className="border px-4 py-2">
+                          <td className=" px-4 py-2">
                             {problem.difficulty}
                           </td>
                         )}
@@ -205,7 +206,7 @@ export default function LCDisplay() {
                 <button
                   disabled={page === 1}
                   onClick={() => setPage((prev) => prev - 1)}
-                  className="px-3 py-1 bg-blue-500 text-white rounded disabled:bg-gray-300"
+                  className="px-3 py-1 bg-blue-900 text-white rounded disabled:bg-gray-900"
                 >
                   Previous
                 </button>
@@ -215,7 +216,7 @@ export default function LCDisplay() {
                 <button
                   disabled={page * size >= total}
                   onClick={() => setPage((prev) => prev + 1)}
-                  className="px-3 py-1 bg-blue-500 text-white rounded disabled:bg-gray-300"
+                  className="px-3 py-1 bg-blue-900 text-white rounded disabled:bg-gray-900"
                 >
                   Next
                 </button>

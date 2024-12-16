@@ -97,9 +97,10 @@ export default function ResizablePythonEditor() {
       onResizeStop={(e, data) => {
         setEditorDimensions({ width: data.size.width, height: data.size.height });
       }}
-      className="border bg-white shadow-md rounded"
+      className=" shadow-md rounded"
     >
-      <div ref={containerRef} className="p-4 h-full">
+      <div id="ace-spacer" className="ace-nord-dark" style={{height: "60px", paddingTop: "10px"}}></div>
+      <div ref={containerRef} className="h-full">
         {/* Ace Editor */}
         <AceEditor
           mode="python"
@@ -109,13 +110,13 @@ export default function ResizablePythonEditor() {
           height="80%"
           value={codeValue}
           onChange={(value) => setCodeValue(value)}
-          fontSize={11}
+          fontSize={12}
           setOptions={{ showLineNumbers: true, tabSize: 2 }}
         />
 
         {/* Console */}
         {isConsoleVisible && (
-          <div className="bg-black text-white font-mono p-2 mt-4 rounded overflow-y-auto" style={{ maxHeight: "150px" }}>
+          <div className="bg-black text-white font-mono p-2 overflow-y-auto" style={{ maxHeight: "150px" }}>
             {consoleLogs.length === 0 ? (
               <p>Console Output...</p>
             ) : (

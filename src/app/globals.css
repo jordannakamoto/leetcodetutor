@@ -19,8 +19,12 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+h1,h2,h3{
+  color: rgb(74, 74, 74);
+}
 
 p{
+  color: rgb(167, 167, 167);
   font-size: 12px;
 }
 table{
@@ -28,7 +32,7 @@ table{
 }
 
 .variable {
-  background-color: hsl(216, 52%, 94%);
+  background-color: hsl(216, 52%, 14%);
   border: 1px solid #a5afe1;
   border-radius: 4px;
   padding: 0 4px;
@@ -36,15 +40,15 @@ table{
 }
 
 .bracketed {
-  background-color: #f1f8e9;
-  border: 1px solid #c5e1a5;
+  background-color: #f1f8e914;
+  /* border: 1px solid #c5e1a5; */
   border-radius: 4px;
   padding: 0 4px;
   font-family: monospace;
 }
 
 .number {
-  background-color: #e3f2fd;
+  background-color: #e3f2fd14;
   border-radius: 4px;
   padding: 0 4px;
   font-family: monospace;
@@ -68,7 +72,18 @@ table{
 }
 
 .constraint-item {
-  background-color: #f0f9ff;
+  background-color: #f0f9ff14;
   padding: 0.5rem;
   border-radius: 6px;
+}
+.bg-gray-1{
+  background-color: #171717;
+}
+
+.text-gold-1{
+  color: #77704b;
+}
+
+.text-blue-1{
+  color: #4b5877;
 }

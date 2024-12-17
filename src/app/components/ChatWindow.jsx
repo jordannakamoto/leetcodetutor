@@ -59,6 +59,7 @@ const ChatWindow = ({ getCodeValue }) => {
             if (e.metaKey && e.shiftKey && e.key === "'"){
                 e.preventDefault();
                 setIsVisible((prev) => !prev);
+                setHint("");
                 setTimeout(() => inputRef.current?.focus(), 100);
             }
             else if (e.metaKey && e.key === "'"){

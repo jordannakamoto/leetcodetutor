@@ -19,10 +19,10 @@ export async function POST(req) {
     }
 
     const prompt = `
-Solution: ${solution}
-Current Code: ${codeValue}
-Task: Based on the solution, provide a single short conceptual step for the next step. 
-`;
+    Solution: ${solution}
+    Current Code: ${codeValue}
+    Task: Based on the solution, provide a single short conceptual step for the next step.  If my approach was wrong, correct it.
+    `;
     console.log(prompt);
     
     const response = await openai.chat.completions.create({

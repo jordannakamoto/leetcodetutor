@@ -1,6 +1,12 @@
+add a pre-processing step
+so we don't just show the solution
+but extract the function headers
+and then generate test cases from the actual problem/solution
+
 figure out how to embed python tutor
 
 https://pythontutor.com/iframe-embed.html#code=class%20Solution%3A%0A%20%20def%20removeDuplicates(self%2C%20nums%3A%20list%5Bint%5D)%20-%3E%20int%3A%0A%20%20%20%20i%20%3D%200%0A%0A%20%20%20%20for%20num%20in%20nums%3A%0A%20%20%20%20%20%20if%20i%20%3C%202%20or%20num%20!%3D%20nums%5Bi%20-%202%5D%3A%0A%20%20%20%20%20%20%20%20nums%5Bi%5D%20%3D%20num%0A%20%20%20%20%20%20%20%20i%20%2B%3D%201%0A%20%20%20%20print(nums)%0A%20%20%20%20return%20i%0A%20%20%20%20%0Asolution%20%3D%20Solution()%0A%0Asolution.removeDuplicates(%5B1%2C1%2C1%2C2%2C2%2C3%5D)&codeDivHeight=600&codeDivWidth=600&cumulative=false&curInstr=0&heapPrimitives=false&origin=opt-frontend.js&py=311&rawInputLstJSON=%5B%5D&textReferences=false
 
 snippets section
 
+recommendation algo?

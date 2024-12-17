@@ -7,7 +7,7 @@ import { ResizableBox } from "react-resizable";
 import ace from "ace-builds";
 import dynamic from "next/dynamic";
 import usePythonRunner from "../hooks/usePythonRunner";
-import { useSolution } from "../contexts/solutionsContext"; // Adjust path if needed
+import { useWorkspace } from "../contexts/workspaceConext"; // Adjust path if needed
 
 // Configure Ace Editor to load from CDN
 const ACE_CDN_BASE = "https://cdnjs.cloudflare.com/ajax/libs/ace/1.23.4/";
@@ -29,7 +29,7 @@ export default function ResizablePythonEditor() {
   const containerRef = useRef(null);
   const [editorDimensions, setEditorDimensions] = useState({ width: 700, height: 400 }); // Default init 
 
-  const { solution } = useSolution(); // Access solution from context
+  const { solution } = useWorkspace(); // Access solution from context
 
 
   useEffect(() => {

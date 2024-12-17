@@ -7,11 +7,11 @@ import LCDisplay from "./components/LCDisplay";
 import PythonEditor from "./components/PythonEditor";
 import React from "react";
 import { ResizableBox } from "react-resizable";
-import { SolutionProvider } from "./contexts/solutionsContext";
+import { WorkspaceProvider } from "./contexts/workspaceConext";
 
 export default function Home() {
   return (
-    <SolutionProvider>
+    <WorkspaceProvider>
 
       <main className="flex items-center justify-center min-h-screen bg-gray-1 ">
         {/* Container for Resizable Columns */}
@@ -34,6 +34,6 @@ export default function Home() {
           <PythonEditor height="100%" width="100%" />
         </div>
       </main>
-    </SolutionProvider>
+    </WorkspaceProvider>
   );
 }

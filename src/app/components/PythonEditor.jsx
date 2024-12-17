@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 
+import ChatWindow from "./ChatWindow";
 import { ResizableBox } from "react-resizable";
 import ace from "ace-builds";
 import dynamic from "next/dynamic";
@@ -128,6 +129,8 @@ export default function ResizablePythonEditor() {
             )}
           </div>
         )}
+          <ChatWindow/>
+
 
         {/* Controls */}
         {/* <div className="mt-4 flex justify-between">

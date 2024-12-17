@@ -3,6 +3,8 @@ import Papa from "papaparse";
 import fs from "fs";
 import path from "path";
 
+/* Retrieves a set of problems from the source csv for display to UI and to enter program */
+
 // Load CSV data
 const CSV_PATH = path.resolve(process.cwd(), "src/data/leetcode2.csv");
 

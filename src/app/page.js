@@ -2,6 +2,7 @@
 
 import "react-resizable/css/styles.css"; // Import Resizable styles
 
+import ChatWindow from "./components/ChatWindow";
 import LCDisplay from "./components/LCDisplay";
 import PythonEditor from "./components/PythonEditor";
 import React from "react";
@@ -29,10 +30,8 @@ export default function Home() {
               <LCDisplay />
             </div>
           </ResizableBox>
-
           {/* Right Column - PythonEditor */}
           <PythonEditor height="100%" width="100%" />
-          
         </div>
       </main>
     </SolutionProvider>

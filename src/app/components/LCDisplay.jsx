@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 
-import { useWorkspace } from "../contexts/workspaceConext";
+import { useWorkspace } from "../contexts/workspaceContext";
 
 const highlightVariables = (description) => {
     // Regex to detect variables, bracketed values, and standalone numbers
@@ -64,7 +64,7 @@ export default function LCDisplay() {
   const [size] = useState(10); // Rows per page
   const [total, setTotal] = useState(0);
   const [selectedProblem, setSelectedProblem] = useState(null); // Selected problem for details view
-  const { setSolution } = useWorkspace();
+  const { setSolution, setProblemDescription } = useWorkspace();
 
   // Function to fetch data from API
   const fetchData = async () => {
@@ -101,8 +101,9 @@ export default function LCDisplay() {
 
   const handleSelectProblem = (problem) => {
     setSelectedProblem(problem);
+    setProblemDescription(problem.problem_description)
     setSolution(problem.solution || "# Solution not available.");
-    console.log(problem.solution);
+    // console.log(problem.solution);
   };
 
 

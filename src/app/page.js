@@ -2,14 +2,16 @@
 
 import "react-resizable/css/styles.css"; // Import Resizable styles
 
+import React, { useRef } from "react";
+
 import ChatWindow from "./components/ChatWindow";
 import LCDisplay from "./components/LCDisplay";
 import PythonEditor from "./components/PythonEditor";
-import React from "react";
 import { ResizableBox } from "react-resizable";
-import { WorkspaceProvider } from "./contexts/workspaceConext";
+import { WorkspaceProvider } from "./contexts/workspaceContext";
 
 export default function Home() {
+
   return (
     <WorkspaceProvider>
 
@@ -31,7 +33,7 @@ export default function Home() {
             </div>
           </ResizableBox>
           {/* Right Column - PythonEditor */}
-          <PythonEditor height="100%" width="100%" />
+          <PythonEditor />
         </div>
       </main>
     </WorkspaceProvider>

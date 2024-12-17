@@ -7,7 +7,7 @@ import { ResizableBox } from "react-resizable";
 import ace from "ace-builds";
 import dynamic from "next/dynamic";
 import usePythonRunner from "../hooks/usePythonRunner";
-import { useWorkspace } from "../contexts/workspaceConext"; // Adjust path if needed
+import { useWorkspace } from "../contexts/workspaceContext"; // Adjust path if needed
 
 // Configure Ace Editor to load from CDN
 const ACE_CDN_BASE = "https://cdnjs.cloudflare.com/ajax/libs/ace/1.23.4/";
@@ -27,13 +27,16 @@ export default function ResizablePythonEditor() {
   const [isConsoleVisible, setIsConsoleVisible] = useState(true);
 
   const containerRef = useRef(null);
+  const editorRef = useRef(null);
   const [editorDimensions, setEditorDimensions] = useState({ width: 700, height: 400 }); // Default init 
 
   const { solution } = useWorkspace(); // Access solution from context
 
+  // Getter function for codeValue
+  const getCodeValue = () => editorRef.current?.editor.getValue();
 
   useEffect(() => {
-    setCodeValue(solution); // Update editor content when solution changes
+    setCodeValue(solution); // Sync with context solution
   }, [solution]);
 
 
@@ -104,6 +107,7 @@ export default function ResizablePythonEditor() {
       <div ref={containerRef} className="h-full">
         {/* Ace Editor */}
         <AceEditor
+          ref={editorRef} // Add this ref
           mode="python"
           theme="nord_dark"
           name="python-editor"
@@ -129,7 +133,7 @@ export default function ResizablePythonEditor() {
             )}
           </div>
         )}
-          <ChatWindow/>
+          <ChatWindow getCodeValue={getCodeValue}/>
 
 
         {/* Controls */}

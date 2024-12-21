@@ -1,0 +1,34 @@
+{
+    "files.exclude": {
+        "**/.vscode": true,
+        ".vscode": true,
+        "jsconfig.json": true,
+        "tailwind.config.js": true,
+        "postcss.config.js": true,
+        ".next": true,
+        "node_modules": true,
+        "package-lock.json": true,
+        "next.config.mjs": true,
+        "postcss.config.mjs": true,
+        "tailwind.config.mjs": true,
+        ".env.local": true,
+        ".gitignore": true,
+        "package.json": true,
+        "src/app/favicon.ico": true,
+        "src/app/layout.js": true
+    },
+    "folder-color.pathColors": [
+        {
+            "folderPath": "leetcodetutor/src/app/api/",
+            "color": "foldercolorizer.color_999966"
+        },
+        {
+            "folderPath": "leetcodetutor/src/app/components/",
+            "color": "foldercolorizer.color_336699"
+        },
+        {
+            "folderPath": "leetcodetutor/src/app/page.js/",
+            "color": "foldercolorizer.color_336666"
+        }
+    ]
+}

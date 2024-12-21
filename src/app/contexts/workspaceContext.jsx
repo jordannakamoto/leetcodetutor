@@ -1,9 +1,9 @@
+// Workspace Context:
+// problem description, solution, codevalue
+
 "use client";
 
 import React, { createContext, useContext, useState } from "react";
-
-// CONTAINS:
-// problem description, solution, codevalue
 
 // Create WorkspaceContext
 const WorkspaceContext = createContext();

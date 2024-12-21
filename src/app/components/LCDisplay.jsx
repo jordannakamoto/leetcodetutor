@@ -1,3 +1,7 @@
+// LCDisplay
+// View 1: Shows leetcode problems in a panel
+// View 2: Shows problem details
+
 "use client";
 
 import React, { useEffect, useState } from "react";

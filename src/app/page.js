@@ -1,10 +1,10 @@
+// Main Page.js
 "use client";
 
 import "react-resizable/css/styles.css"; // Import Resizable styles
 
 import React, { useRef } from "react";
 
-import ChatWindow from "./components/ChatWindow";
 import LCDisplay from "./components/LCDisplay";
 import PythonEditor from "./components/PythonEditor";
 import { ResizableBox } from "react-resizable";
@@ -16,14 +16,13 @@ export default function Home() {
     <WorkspaceProvider>
 
       <main className="flex items-center justify-center min-h-screen bg-gray-1 ">
-        {/* Container for Resizable Columns */}
         <div className="flex w-full max-w-7xl h-screen space-x-2">
           {/* Left Column - LCDisplay */}
           <ResizableBox
-            width={500} // Initial width
-            height={Infinity} // Full height
+            width={500}
+            height={Infinity}                // Full height
             axis="x"
-            resizeHandles={["e"]} // Resizable horizontally (east handle)
+            resizeHandles={["e"]}            // Resizable horizontally (east handle)
             minConstraints={[300, Infinity]} // Minimum width
             maxConstraints={[800, Infinity]} // Maximum width
             className="bg-gray-1 shadow-md rounded overflow-auto"

@@ -1,9 +1,10 @@
+// LEETCODE API
+/* Retrieves a set of problems from the source csv for display to UI and to enter program */
+
 import { NextResponse } from "next/server";
 import Papa from "papaparse";
 import fs from "fs";
 import path from "path";
-
-/* Retrieves a set of problems from the source csv for display to UI and to enter program */
 
 // Load CSV data
 const CSV_PATH = path.resolve(process.cwd(), "src/data/leetcode2.csv");
@@ -17,8 +18,6 @@ export async function GET(req) {
 
     // Read CSV File
     const fileContent = fs.readFileSync(CSV_PATH, "utf-8");
-
-    // Parse CSV into JSON
     const parsed = Papa.parse(fileContent, { header: true, skipEmptyLines: true });
     let data = parsed.data;
 
@@ -40,7 +39,8 @@ export async function GET(req) {
       size,
       results: paginatedData,
     });
-  } catch (error) {
+  } // ~ Error (500) 
+  catch (error) {
     console.error("Error loading CSV:", error);
     return NextResponse.json(
       { error: "Failed to load or parse CSV data." },

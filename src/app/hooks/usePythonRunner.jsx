@@ -1,3 +1,7 @@
+// UsePythonRunner.jsx
+// Hook:
+// load and run Python code since pyodide is async clientside
+
 import { useEffect, useState } from "react";
 
 import { useScript } from "usehooks-ts";

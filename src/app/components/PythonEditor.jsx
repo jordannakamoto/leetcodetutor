@@ -9,66 +9,35 @@ import dynamic from "next/dynamic";
 import usePythonRunner from "../hooks/usePythonRunner";
 import { useWorkspace } from "../contexts/workspaceContext"; // Adjust path if needed
 
-// Configure Ace Editor to load from CDN
+// Configure Ace Editor to load from CDN, then Dynamically import AceEditor
 const ACE_CDN_BASE = "https://cdnjs.cloudflare.com/ajax/libs/ace/1.23.4/";
 ace.config.set("basePath", ACE_CDN_BASE);
-ace.config.setModuleUrl("ace/mode/python", `${ACE_CDN_BASE}mode-python.js`);
+// Change this to change the theme
 ace.config.setModuleUrl("ace/theme/nord_dark", `${ACE_CDN_BASE}theme-nord_dark.js`);
-ace.config.setModuleUrl("ace/ext/language_tools", `${ACE_CDN_BASE}ext-language_tools.js`);
-
-// Dynamically import AceEditor
+ace.config.setModuleUrl("ace/mode/python", `${ACE_CDN_BASE}mode-python.js`); ace.config.setModuleUrl("ace/ext/language_tools", `${ACE_CDN_BASE}ext-language_tools.js`);
 const AceEditor = dynamic(() => import("react-ace"), { ssr: false });
 
 
 export default function ResizablePythonEditor() {
+  // STATE
+  // Pyodide/AceEditor
   const { pyodide, loading, error, runPythonCode } = usePythonRunner();
+  
   const [codeValue, setCodeValue] = useState("# Write your Python code here...");
   const [consoleLogs, setConsoleLogs] = useState([]);
   const [isConsoleVisible, setIsConsoleVisible] = useState(true);
 
+  // REFS
   const containerRef = useRef(null);
   const editorRef = useRef(null);
-  const [editorDimensions, setEditorDimensions] = useState({ width: 700, height: 400 }); // Default init 
 
-  const { solution } = useWorkspace(); // Access solution from context
+  // CONTEXT
+  const { solution } = useWorkspace();
 
   // Getter function for codeValue
   const getCodeValue = () => editorRef.current?.editor.getValue();
 
-  useEffect(() => {
-    setCodeValue(solution); // Sync with context solution
-  }, [solution]);
-
-
-  // UpdateDimensions
-  // Update height dynamically on window resize
-  // Sets height to 100vh equivalent
-  useEffect(() => {
-    const updateDimensions = () => {
-      setEditorDimensions((prev) => ({
-        ...prev,
-        height: window.innerHeight, 
-      }));
-    };
-  
-    window.addEventListener("resize", updateDimensions);
-    updateDimensions();
-    return () => window.removeEventListener("resize", updateDimensions);
-  }, []);
-
-  // Key Handler for running code with CMD + Enter
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.metaKey && e.key === "Enter") {
-        executeCode();
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [codeValue]);
-
-
+  // INIT
   // Workaround for loading in ace editor on client side
   useEffect(() => {
     const loadAceBuilds = async () => {
@@ -82,32 +51,54 @@ export default function ResizablePythonEditor() {
     window.define = window.define || (() => {});
   }, []);
   
+  // Set the code value to the solution on load...
+  // TODO: make this more sophisticated
+  useEffect(() => {
+    setCodeValue(solution); 
+  }, [solution]);
 
-  // Function to execute Python code
+  // Key Handler for running code with CMD + Enter
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.metaKey && e.key === "Enter") {
+        executeCode();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [codeValue]);
+  
+  // [Execute Code] - Function to execute Python code
   const executeCode = async () => {
     if (!pyodide) return;
     const output = await runPythonCode(codeValue);
     setConsoleLogs(output);
   };
 
+  // --- RENDER ---------------------------------------------------------------------------------------------------------------------------------  //
   return (
     <ResizableBox
-      width={editorDimensions.width}
-      height={editorDimensions.height}
+      width={500}
       axis="both"
       resizeHandles={["w"]}
       minConstraints={[400, 300]}
       maxConstraints={[1200, 800]}
-      onResizeStop={(e, data) => {
-        setEditorDimensions({ width: data.size.width, height: data.size.height });
-      }}
       className=" shadow-md rounded"
     >
+      <ResizableBox
+        width="100%"
+        height="60px"
+        resizeHandles={["s"]}
+        style={{ backgroundColor: "black" }}>
+          hello world
+      </ResizableBox>
+      {/* AI Output/Hints */}
       <div id="ace-spacer" className="ace-nord-dark" style={{height: "60px", paddingTop: "10px"}}></div>
       <div ref={containerRef} className="h-full">
         {/* Ace Editor */}
         <AceEditor
-          ref={editorRef} // Add this ref
+          ref={editorRef}
           mode="python"
           theme="nord_dark"
           name="python-editor"
@@ -134,24 +125,6 @@ export default function ResizablePythonEditor() {
           </div>
         )}
           <ChatWindow getCodeValue={getCodeValue}/>
-
-
-        {/* Controls */}
-        {/* <div className="mt-4 flex justify-between">
-          <button
-            onClick={executeCode}
-            className="bg-green-500 text-white px-3 py-1 rounded"
-            disabled={!pyodide || loading}
-          >
-            {loading ? "Loading Pyodide..." : "Run Code (Ctrl + Enter)"}
-          </button>
-          <button
-            onClick={() => setIsConsoleVisible(!isConsoleVisible)}
-            className="bg-blue-500 text-white px-3 py-1 rounded"
-          >
-            {isConsoleVisible ? "Hide Console" : "Show Console"}
-          </button>
-        </div> */}
       </div>
     </ResizableBox>
   );

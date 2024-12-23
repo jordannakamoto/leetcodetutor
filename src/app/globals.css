@@ -87,3 +87,24 @@ table{
 .text-blue-1{
   color: #4b5877;
 }
+
+.react-tabs__tab{
+  background-color: #171717;
+  font-size: 12px;
+  color: #77704b;
+  padding: 0.2rem 1rem;
+  cursor: pointer;
+}
+
+.react-tabs__tab-list{
+  margin-top: 70px;
+  /* border: none !important; */
+  /* margin: 0 !important; */
+  display: flex;
+  border-bottom: 20px solid #2e3440;
+}
+
+.react-tabs__tab--selected{
+  background-color: #2e3440 !important;
+  outline: none !important;
+}

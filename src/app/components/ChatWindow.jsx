@@ -23,7 +23,7 @@ const ChatWindow = ({ getCodeValue }) => {
 
         try{
             // get the code value from PythonEditor component
-            const currentCodeValue = getCodeValue();
+                const currentCodeValue = getCodeValue();
 
             const response = await fetch("/api/getHint",{
                 method: "POST",
@@ -114,11 +114,11 @@ const ChatWindow = ({ getCodeValue }) => {
             isVisible ? "block" : "hidden"
           }`}
           style={{
-            top: "2%",            // Vertically center the window
-            left: "45%",           // Position it 25% horizontally
-            transform: "translateY(-50%)", // Adjust to center precisely
+            top: "3%",            // Vertically center the window
+            left: "40%",           // Position it 25% horizontally
+            transform: "translateY(-45%)", // Adjust to center precisely
             zIndex: 9999,          // Ensure it's on top
-            width: "500px",        // Set a fixed width for the chat window
+            width: "700px",        // Set a fixed width for the chat window
             fontSize: '12px'
           }}
         >
@@ -139,15 +139,7 @@ const ChatWindow = ({ getCodeValue }) => {
                 onKeyDown={handleKeyDown}
                 />
             )}
-    
-            {/* Send Button
-            <button
-              className="bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded"
-              onClick={handleSendMessage}
-              disabled={isSending}
-            >
-              {isSending ? "Sending..." : "Send"}
-            </button> */}
+
           </div>
         </div>
       );

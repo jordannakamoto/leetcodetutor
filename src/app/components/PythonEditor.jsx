@@ -20,10 +20,9 @@ ace.config.setModuleUrl("ace/theme/nord_dark", `${ACE_CDN_BASE}theme-nord_dark.j
 ace.config.setModuleUrl("ace/mode/python", `${ACE_CDN_BASE}mode-python.js`); ace.config.setModuleUrl("ace/ext/language_tools", `${ACE_CDN_BASE}ext-language_tools.js`);
 const AceEditor = dynamic(() => import("react-ace"), { ssr: false });
 
-
 export default function ResizablePythonEditor() {
   // CONTEXT
-  const { solution } = useWorkspace();
+  const { solution, setWorkspaceContext } = useWorkspace();
 
   // STATE
   // Pyodide/AceEditor
@@ -38,12 +37,11 @@ export default function ResizablePythonEditor() {
 
   // // REFS
   // const containerRef = useRef(null);
-  // const editorRef = useRef(null);
 
 
 
   // // Getter function for codeValue
-  // const getCodeValue = () => editorRef.current?.editor.getValue();
+  const getCodeValue = () => workspaceCode;
 
   // Pre-Process Solution
   // - removes all lines except function headers
@@ -121,7 +119,9 @@ export default function ResizablePythonEditor() {
             width="100%"
             height="80vh"
             value={workspaceCode}
-            onChange={(value) => setWorkspaceCode(value)}
+            onChange={(value) => {
+              setWorkspaceCode(value); // Update the state
+            }}
             fontSize={12}
             setOptions={{ showLineNumbers: true, tabSize: 4 }}
           />
@@ -169,7 +169,7 @@ export default function ResizablePythonEditor() {
           )}
         </div>
       )}
-      <ChatWindow getCodeValue={() => workspaceCode} />
+      <ChatWindow />
     </ResizableBox>
   );
 }
